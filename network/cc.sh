@@ -8,7 +8,7 @@ export MSYS_NO_PATHCONV=1
 starttime=$(date +%s)
 # use golang as programing language
 CC_RUNTIME_LANGUAGE=golang
-CC_SRC_PATH=github.com/newham/fabric-iot/chaincode/go/pc
+CC_SRC_PATH=github.com/minhas309/fabric-iot/chaincode/go/pc
 CC_NAME=PC
 CC_VERSION=1.0
 CC_INVOKE_FUNC_NAME="Synchro"
@@ -31,7 +31,7 @@ if [ -n $1 -a -n $2 -a -n $3 -a -n $4 ]; then
   ACTION=$1
   CC_NAME=$2
   CC_VERSION=$3
-  CC_SRC_PATH="github.com/newham/fabric-iot/chaincode/$4"
+  CC_SRC_PATH="github.com/minhas/fabric-iot/chaincode/$4"
   if [ ! $5 = '' ]; then
     CC_INVOKE_FUNC_NAME=$5
   fi
