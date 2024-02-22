@@ -8,7 +8,7 @@ import (
 )
 
 type ABACRequest struct {
-	AS AS
+	SA SA
 	AO AO
 }
 
@@ -31,5 +31,5 @@ func (a Attrs) GetId() string {
 }
 
 func (r ABACRequest) GetAttrs() Attrs {
-	return Attrs{DeviceId: r.AO.DeviceId, UserId: r.AS.UserId, Timestamp: time.Now().Unix()}
+	return Attrs{DeviceId: r.AO.DeviceId, UserId: r.SA.UserId, Timestamp: time.Now().Unix()}
 }

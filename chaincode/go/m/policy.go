@@ -8,13 +8,13 @@ import (
 
 // Define the Policy structure
 type Policy struct {
-	AS AS
+	SR SR
 	AO AO
-	AP int //1 is allow , 0 is deney
+	SP SP  //1 is allow , 0 is deney
 	AE AE
 }
 
-type AS struct {
+type SR struct {
 	UserId string `json:"userId"`
 	Role   string `json:"role"`
 	Group  string `json:"group"`
@@ -22,7 +22,11 @@ type AS struct {
 
 type AO struct {
 	DeviceId string `json:"deviceId"`
-	MAC      string `json:"MAC"`
+	MAC string `json:"MAC"`
+}
+
+type SP struct {
+	Permissions []string `json:"permissions"`
 }
 
 type AE struct {
@@ -40,5 +44,5 @@ func (p *Policy) ToBytes() []byte {
 }
 
 func (p *Policy) GetID() string {
-	return fmt.Sprintf("%x", sha256.Sum256([]byte(p.AS.UserId+p.AO.DeviceId)))
+	return fmt.Sprintf("%x", sha256.Sum256([]byte(p.SR.UserId+p.AO.DeviceId)))
 }
