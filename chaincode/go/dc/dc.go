@@ -12,8 +12,8 @@ import (
 type DeviceContract interface {
 	Init(shim.ChaincodeStubInterface) sc.Response
 	Invoke(shim.ChaincodeStubInterface) sc.Response
-	AddURL(shim.ChaincodeStubInterface, []string) sc.Response
-	GetURL(shim.ChaincodeStubInterface, []string) sc.Response
+	AddAsset(shim.ChaincodeStubInterface, []string) sc.Response
+	GetAsset(shim.ChaincodeStubInterface, []string) sc.Response
 	Synchro() sc.Response
 }
 
@@ -43,10 +43,10 @@ func (cc *ChainCode) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response {
 	// Retrieve the requested Smart Contract function and arguments
 	function, args := APIstub.GetFunctionAndParameters()
 	// Route to the appropriate handler function to interact with the ledger appropriately
-	if function == "AddURL" {
-		return cc.AddURL(APIstub, args)
-	} else if function == "GetURL" {
-		return cc.GetURL(APIstub, args)
+	if function == "AddAsset" {
+		return cc.AddAsset(APIstub, args)
+	} else if function == "GetAsset" {
+		return cc.GetAsset(APIstub, args)
 	} else if function == "Synchro" {
 		return cc.Synchro()
 	}
@@ -55,14 +55,17 @@ func (cc *ChainCode) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response {
 }
 
 //This is the main smart contract of system
-func (cc *ChainCode) AddURL(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+func (cc *ChainCode) AddAsset(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
 
 	deviceId := args[0]
-	url := args[1]
-	r := m.Resource{Timestamp: time.Now().Unix(), URL: url}
+	assetID := args[1]
+	owner := args[2]
+	balance := args[3]
+	appraisedValue := args[4]
+	r := m.Resource{Timestamp: time.Now().Unix(), AssetID: assetID, Owner: owner, Balance: balance, AppraisedValue: appraisedValue}
 
 	// put k-v to DB
 	err := APIstub.PutState(deviceId, r.ToBytes())
@@ -73,7 +76,7 @@ func (cc *ChainCode) AddURL(APIstub shim.ChaincodeStubInterface, args []string) 
 	return shim.Success(m.OK)
 }
 
-func (cc *ChainCode) GetURL(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+func (cc *ChainCode) GetAsset(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}

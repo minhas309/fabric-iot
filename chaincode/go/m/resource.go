@@ -5,7 +5,10 @@ import "encoding/json"
 // Define the resource structure
 type Resource struct {
 	Timestamp int64  `json:"timestamp"`
-	URL       string `json:"url"`
+	AssetID string `json:"assetID"`
+	Owner string `json:"owner"`
+	Balance int `json:"balance"`
+	AppraisedValue int `json:"appraisedValue"`
 }
 
 func (r Resource) ToBytes() []byte {
