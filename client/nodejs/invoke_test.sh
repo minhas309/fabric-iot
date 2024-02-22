@@ -1,4 +1,4 @@
-node invoke.js dc AddURL D100010001 https://test.iot.org/voice00001.mp3
+node invoke.js dc AddAsset D100010001 asset1 Tom 1000 600
 # node invoke.js dc GetURL D100010001
 
 # node invoke.js pc AddPolicy '{"AS":{"userId":"13800010002","role":"u1","group":"g1"},"AO":{"deviceId":"D100010001","MAC":"00:11:22:33:44:55"},"AP":1,"AE":{"createdTime":1575468182,"endTime":1576468182,"allowedIP":"*.*.*.*"}}'

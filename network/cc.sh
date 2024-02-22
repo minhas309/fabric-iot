@@ -31,7 +31,7 @@ if [ -n $1 -a -n $2 -a -n $3 -a -n $4 ]; then
   ACTION=$1
   CC_NAME=$2
   CC_VERSION=$3
-  CC_SRC_PATH="github.com/minhas/fabric-iot/chaincode/$4"
+  CC_SRC_PATH="github.com/minhas309/fabric-iot/chaincode/$4"
   if [ ! $5 = '' ]; then
     CC_INVOKE_FUNC_NAME=$5
   fi
