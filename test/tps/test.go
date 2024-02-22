@@ -86,9 +86,9 @@ func TestPCAddPolicy(c chan int, n int) {
 	})
 }
 
-func GetPolicyReq(i, r, g, AP int) string {
+func GetPolicyReq(i, r, g, SP int) string {
 	now := time.Now().Unix()
-	policyStr := fmt.Sprintf(`{"AS":{"userId":"%s","role":"u%d","group":"g%d"},"AO":{"deviceId":"%s","MAC":"%s"},"AP":%d,"AE":{"createdTime":%d,"endTime":%d,"allowedIP":"*.*.*.*"}}`, GetUserID(i), r, g, GetDeviceID(i), RandomMac(), AP, now, now+100000)
+	policyStr := fmt.Sprintf(`{"SR":{"userId":"%s","role":"u%d","group":"g%d"},"AO":{"deviceId":"%s","MAC":"%s"},"SP":%d,"AE":{"createdTime":%d,"endTime":%d,"allowedIP":"*.*.*.*"}}`, GetUserID(i), r, g, GetDeviceID(i), RandomMac(), SP, now, now+100000)
 	return policyStr
 }
 
@@ -180,7 +180,7 @@ func TestCC(c chan int, n int, f func(int) string) {
 }
 
 func GetACRequest(i int) string {
-	return fmt.Sprintf(`{"AS":{"userId":"%s","role":"u1","group":"g1"},"AO":{"deviceId":"%s","MAC":"00:11:22:33:44:55"}}`, GetUserID(i), GetDeviceID(i))
+	return fmt.Sprintf(`{"SR":{"userId":"%s","role":"u1","group":"g1"},"AO":{"deviceId":"%s","MAC":"00:11:22:33:44:55"}}`, GetUserID(i), GetDeviceID(i))
 }
 
 func GetID(i int) int {

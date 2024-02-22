@@ -55,7 +55,7 @@ func (cc *ChainCode) CheckAccess(APIstub shim.ChaincodeStubInterface, args []str
 		// return shim.Error(attrs.GetId() + ";" + string(resp.GetPayload()) + ";" + err.Error())
 	}
 	//check AP
-	if policy.AP != 1 {
+	if policy.SP != 1 {
 		return shim.Error("403")
 		// return shim.Error(string(policy.ToBytes()) + ": AP is deney")
 	}
@@ -66,12 +66,12 @@ func (cc *ChainCode) CheckAccess(APIstub shim.ChaincodeStubInterface, args []str
 		return shim.Error("AE is timeout")
 	}
 	//get URL
-	resp = APIstub.InvokeChaincode("dc", [][]byte{[]byte("GetURL"), []byte(attrs.DeviceId)}, "iot-channel")
+	resp = APIstub.InvokeChaincode("dc", [][]byte{[]byte("ReadAsset"), []byte(attrs.DeviceId)}, "iot-channel")
 	res, err := m.NewResource(resp.GetPayload())
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	return shim.Success([]byte(res.URL))
+	return shim.Success([]byte(res.AssetID))
 }
 
 /*
