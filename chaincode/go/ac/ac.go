@@ -6,7 +6,7 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
-	"github.com/newham/fabric-iot/chaincode/go/m"
+	"github.com/minhas309/fabric-iot/chaincode/go/m"
 )
 
 type AccessContract interface {
