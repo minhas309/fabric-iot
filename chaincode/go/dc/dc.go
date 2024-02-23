@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/hyperledger/fabric-chaincode-go/shim"
@@ -63,12 +64,20 @@ func (cc *ChainCode) AddAsset(APIstub shim.ChaincodeStubInterface, args []string
 	deviceId := args[0]
 	assetID := args[1]
 	owner := args[2]
-	balance := args[3]
-	appraisedValue := args[4]
+	// convert balance and appraisedValue to int
+	balance, err := strconv.Atoi(args[3])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	appraisedValue, err := strconv.Atoi(args[4])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
 	r := m.Resource{Timestamp: time.Now().Unix(), AssetID: assetID, Owner: owner, Balance: balance, AppraisedValue: appraisedValue}
 
 	// put k-v to DB
-	err := APIstub.PutState(deviceId, r.ToBytes())
+	err = APIstub.PutState(deviceId, r.ToBytes())
 	if err != nil {
 		return shim.Error(err.Error())
 	}

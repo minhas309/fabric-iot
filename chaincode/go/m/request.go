@@ -8,8 +8,9 @@ import (
 )
 
 type ABACRequest struct {
-	SA SA
+	SR SR
 	AO AO
+	SP SP
 }
 
 func (r *ABACRequest) ToBytes() []byte {
@@ -31,5 +32,5 @@ func (a Attrs) GetId() string {
 }
 
 func (r ABACRequest) GetAttrs() Attrs {
-	return Attrs{DeviceId: r.AO.DeviceId, UserId: r.SA.UserId, Timestamp: time.Now().Unix()}
+	return Attrs{DeviceId: r.AO.DeviceId, UserId: r.SR.UserId, Timestamp: time.Now().Unix()}
 }

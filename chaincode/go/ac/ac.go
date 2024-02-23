@@ -55,7 +55,7 @@ func (cc *ChainCode) CheckAccess(APIstub shim.ChaincodeStubInterface, args []str
 		// return shim.Error(attrs.GetId() + ";" + string(resp.GetPayload()) + ";" + err.Error())
 	}
 	//check AP
-	if policy.SP != 1 {
+	if len(policy.SP.Permissions) != 1 {
 		return shim.Error("403")
 		// return shim.Error(string(policy.ToBytes()) + ": AP is deney")
 	}
