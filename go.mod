@@ -1,4 +1,4 @@
-module github.com/minhas309/fabric-iot/chaincode/go/ac
+module github.com/minhas309/fabric-iot
 
 go 1.21.1
 
